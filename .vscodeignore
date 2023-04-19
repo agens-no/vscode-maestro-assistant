@@ -1,0 +1,15 @@
+node_modules/
+!node_modules/{js-yaml,vscode-yaml,fs,path}
+
+.vscode/**
+out/test/**
+src/**
+**/*.map
+.git
+.gitignore
+tsconfig.json
+debug.log
+scripts
+tslint.json
+*.log
+**/*.ts

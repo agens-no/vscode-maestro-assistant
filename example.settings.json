@@ -1,0 +1,7 @@
+{
+    "maestro-assistant.commands": {
+      "iOS": "maestro test -e APP_ID=no.agens.maestro.ios -e PLATFORM=ios {FILE_PATH}",
+      "Android": "maestro test -e APP_ID=no.agens.maestro.android -e PLATFORM=android {FILE_PATH}"
+    }
+  }
+  

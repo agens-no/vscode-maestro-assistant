@@ -1,0 +1,97 @@
+{
+  "name": "maestro-assistant",
+  "displayName": "Maestro Assistant",
+  "description": "This extension streamlines the process of working with Maestro tests, enhancing productivity and user experience. It offers a variety of useful functionalities, including launching the currently opened test and copying the automation ID with ease. Designed to simplify test management, the extension aims to improve efficiency and reduce the time spent on repetitive tasks, making Maestro test execution a seamless and more enjoyable experience.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "publisher": "Arild Langtind <arild@agens.no>",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Maestro Assistant",
+      "properties": {
+        "maestro-assistant.commands": {
+          "type": "object",
+          "default": {},
+          "description": "The commands for each platform."
+        },
+        "maestro-assistant.templatesFolderPath": {
+          "type": "string",
+          "default": "${workspaceFolder}/templates",
+          "description": "Path to the folder containing the template files."
+        },
+        "maestro-assistant.testsRootFolder": {
+          "type": "string",
+          "default": "${workspaceFolder}/tests",
+          "description": "Path to the root folder containing the test flows."
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "yaml",
+        "aliases": [
+          "YAML",
+          "yaml"
+        ],
+        "extensions": [
+          ".yaml",
+          ".yml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "extension.getTestrailAutomationId",
+        "title": "Maestro: Copy AutomationID to clipboard"
+      },
+      {
+        "command": "extension.runMaestroWithCurrentFile",
+        "title": "Maestro: Run maestro flows with current file"
+      },
+      {
+        "command": "extension.createFlow",
+        "title": "Maestro: Create a new flow from template"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agensdev/vscode-automation-id-fetcher.git"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.76.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.38.0",
+    "eslint-config-xo": "^0.43.1",
+    "eslint-config-xo-typescript": "^0.57.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "vscode-yaml": "^0.13.0"
+  }
+}
