@@ -58,6 +58,7 @@ Here's an example of a template file (flow_template.yaml):
 // CLEAR_LAUNCH: true, false
 // ENVIRONMENT: prod, qa01, dev
 // LOGIN: true, false
+// PROXY: true, false
 
 # {{description}}
 
@@ -67,6 +68,7 @@ env:
   CLEAR_LAUNCH: {{CLEAR_LAUNCH}}
   ENVIRONMENT: {{ENVIRONMENT}}
   LOGIN: {{LOGIN}}
+  PROXY: {{PROXY}}
 ---
 
 # TODO: Add Maestro commands, if any, you want to be a part of the template

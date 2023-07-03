@@ -29,9 +29,7 @@ export async function getTestrailAutomationId() {
       });
 
       if (name) {
-        const fileNameWithExtension = path.basename(document.uri.fsPath);
-        const fileNameWithoutExtension = path.parse(fileNameWithExtension).name;
-        const combinedText = `${fileNameWithoutExtension}.${name}`;
+        const combinedText = `${name}.${name}`;
         await vscode.env.clipboard.writeText(combinedText);
         vscode.window.showInformationMessage(`Copied to clipboard: ${combinedText}`);
       } else {
