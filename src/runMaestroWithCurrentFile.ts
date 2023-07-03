@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export async function runMaestroWithCurrentFile(commands: { [key: string]: string }) {
+export async function runMaestroWithCurrentFile(commands: { [key: string]: string | Array<{ name: string; command: string }> }) {
     const activeEditor = vscode.window.activeTextEditor;
     if (!activeEditor) {
       vscode.window.showErrorMessage('No active text editor found.');
@@ -24,7 +24,7 @@ export async function runMaestroWithCurrentFile(commands: { [key: string]: strin
       // Execute the only available command directly
       const platform = Object.keys(commands)[0];
       const commandTemplate = commands[platform];
-      executeCommand(commandTemplate, activeFilePath);
+      executeCommands(commandTemplate, activeFilePath, platform);
     } else {
       // Generate options based on the configuration
       const options: vscode.QuickPickItem[] = Object.entries(commands).map(([platform, command]) => {
@@ -42,16 +42,27 @@ export async function runMaestroWithCurrentFile(commands: { [key: string]: strin
   
       const platform = selectedItem.label;
       const commandTemplate = commands[platform];
-      executeCommand(commandTemplate, activeFilePath);
+      executeCommands(commandTemplate, activeFilePath, platform);
     }
   }
   
-  function executeCommand(commandTemplate: string, activeFilePath: string) {
-    const terminal = vscode.window.activeTerminal || vscode.window.createTerminal();
-    terminal.show();
+  function executeCommands(commandTemplate: string | Array<{ name: string; command: string }>, activeFilePath: string, platformName: string) {
+    if (Array.isArray(commandTemplate)) {
+      for (const cmdObj of commandTemplate) {
+        const terminalName = cmdObj.name;
+        const terminal = vscode.window.createTerminal(terminalName);
+        terminal.show();
   
-    // Replace the placeholders with actual values
-    const command = commandTemplate.replace('{FILE_PATH}', activeFilePath);
-    terminal.sendText(command);
+        const command = cmdObj.command.replace('{FILE_PATH}', activeFilePath);
+        terminal.sendText(command);
+      }
+    } else {
+      // Use the `platformName` as the terminal name for single commands
+      const terminal = vscode.window.activeTerminal || vscode.window.createTerminal(platformName);
+      terminal.show();
+  
+      const command = commandTemplate.replace('{FILE_PATH}', activeFilePath);
+      terminal.sendText(command);
+    }
   }
   
