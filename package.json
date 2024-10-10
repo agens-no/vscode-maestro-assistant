@@ -2,7 +2,7 @@
   "name": "maestro-assistant",
   "displayName": "Maestro Assistant",
   "description": "This extension streamlines the process of working with Maestro tests, enhancing productivity and user experience. It offers a variety of useful functionalities, including launching the currently opened test and copying the automation ID with ease. Designed to simplify test management, the extension aims to improve efficiency and reduce the time spent on repetitive tasks, making Maestro test execution a seamless and more enjoyable experience.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "engines": {
     "vscode": "^1.76.0"
   },
